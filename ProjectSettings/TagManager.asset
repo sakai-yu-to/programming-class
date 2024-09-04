@@ -5,7 +5,20 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Wall
+  - Coin
+  - CoinBlock
+  - ItemBlock
   - Enemy
+  - CoinedBlock
+  - Head
+  - Foot
+  - Turn
+  - Kuribou
+  - Dead
+  - Dossun
+  - Goal
+  - Goaled
   layers:
   - Default
   - TransparentFX
@@ -42,6 +55,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: map
+    uniqueID: 1719010915
+    locked: 0
+  - name: coinBlock
+    uniqueID: 895770651
     locked: 0
   - name: Enemies
     uniqueID: 3014854963
