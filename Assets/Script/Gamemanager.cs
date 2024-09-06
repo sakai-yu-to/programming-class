@@ -9,6 +9,12 @@ public class Gamemanager : MonoBehaviour
     public static Gamemanager instance = null;
     public int life = 10;
     public int totalCoin = 0;
+    public float Stage1totalTime = 200.0f;
+    public float clearTime;
+
+    public float highestScore1;
+
+
 
     private void Awake()
     {

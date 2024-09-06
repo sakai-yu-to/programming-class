@@ -8,7 +8,6 @@ public class HeadCollision : MonoBehaviour
 {
     public PlayerMove playermove;
 
-    private string coinBlockTag = "CoinBlock";
 
     public Tilemap tilemap; // 参照するTilemap
     public TileBase coinedBlockTile; // 表示したい新しいタイル
@@ -16,7 +15,7 @@ public class HeadCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(coinBlockTag))
+        if (other.CompareTag("CoinBlock"))
         {
             Debug.Log("coinBlock collided");
 

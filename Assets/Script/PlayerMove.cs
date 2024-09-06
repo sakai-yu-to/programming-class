@@ -10,8 +10,8 @@ public class PlayerMove : MonoBehaviour
     public float jumpSpeed;
     public float gravity;
     public float jumpHeight;
-    public float bounceHeight; // バウンス時の最大高さ
-    public float bounceSpeed; // バウンス時の速度
+    public float bounceHeight; 
+    public float bounceSpeed; 
     public CheckGround ground;
     public CheckGround head;
 
@@ -22,26 +22,18 @@ public class PlayerMove : MonoBehaviour
 
     private bool isJump = false;
     private float jumpPos = 0.0f;
-    private float bounceStartPos = 0.0f; // バウンス開始時の高さ
+    private float bounceStartPos = 0.0f; 
 
     public float speed = 5.0f;
     public float xSpeed = 0.0f;
     public float ySpeed = 0.0f;
 
-    private string headTag = "Head";
-    private string footTag = "Foot";
 
-    private string enemyTag = "Enemy";
-    private string kuribouTag = "Kuribou";
-    private string dossunTag = "Dossun";
     public float down_time;
     private bool down_flag = false;
     private bool isDown = false;
 
-    private string coinTag = "Coin";
 
-    private string coinBlockTag = "CoinBlock";
-    private string deadTag = "Dead";
 
     public Tilemap tilemap;
     public TileBase coinedBlockTile;
@@ -51,6 +43,7 @@ public class PlayerMove : MonoBehaviour
     public AudioSource damageSource;
     public AudioSource goalSource;
 
+    public AudioClip menuMusic;
     public AudioClip coinSound;
     public AudioClip stage1Music;
     public AudioClip damageSound;
@@ -62,9 +55,10 @@ public class PlayerMove : MonoBehaviour
     private float damagedTime = 0.0f;
     private bool damageRed = false;
 
-    private bool enemyBounce = false; // 敵に当たってバウンドするフラグ
 
-    private string goalTag = "Goal";
+
+    private bool enemyBounce = false; 
+
     private bool goalFlag = false;
     public GameObject goal;
     public GameObject goaled;
@@ -75,14 +69,34 @@ public class PlayerMove : MonoBehaviour
     private bool isRandomMoving = false; // ランダム移動を制御するフラグ
     private bool isGoalActionComplete = false; // ゴール後の動作が完了したかどうかのフラグ
 
+    private float jumpingTime = 0.0f;
+    private float moveMenuTime = 0.0f;
+
+    public float invincibilityTime = 2.0f;
+    private float lastDamageTime;
+    private bool invincible = false;
+    public bool timerStop = false;
+
 
 
     void Start()
     {
+        Gamemanager.instance.life = 10;
+        Gamemanager.instance.totalCoin = 0;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         down_time = 0;
-        stage1Source.clip = stage1Music;
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "Menu")
+        {
+            stage1Source.clip = menuMusic;
+
+        }
+        else if(sceneName == "Stage1")
+        {
+            stage1Source.clip = stage1Music;
+
+        }
         stage1Source.Play();
         damagePanel.SetActive(false);
         goaled.SetActive(false);
@@ -98,7 +112,17 @@ public class PlayerMove : MonoBehaviour
             isDown = true;
             down_flag = true;
             Gamemanager.instance.life = 10;
-            SceneManager.LoadScene("Stage1");
+            SceneManager.LoadScene("Menu");
+        }
+
+        if(ySpeed >= jumpSpeed * 3)
+        {
+            jumpingTime += Time.deltaTime;
+            if(jumpingTime > 0.5f)
+            {
+                jumpingTime = 0.0f;
+                ySpeed = -gravity;
+            }
         }
 
         // ゴール後の動作を制御
@@ -149,6 +173,16 @@ public class PlayerMove : MonoBehaviour
 
             // ゴール後の処理が行われている間は、これ以上の処理を行わない
             return;
+        }
+
+        if (isGoalActionComplete)
+        {
+            moveMenuTime += Time.deltaTime;
+            if(moveMenuTime > 2.0f)
+            {
+                SceneManager.LoadScene("Menu");
+
+            }
         }
 
         // ゴール後の処理が行われていない場合の通常の移動処理
@@ -236,13 +270,27 @@ public class PlayerMove : MonoBehaviour
             getCoin = false;
         }
 
-        if (damageFlag)
+        if(damageFlag && invincible)
         {
+            damageFlag = false;
+        }
+        if (damageFlag && !invincible)
+        {
+
             Gamemanager.instance.life--;
             damageSource.PlayOneShot(damageSound);
             damagePanel.SetActive(true);
             damageRed = true;
             damageFlag = false;
+
+            invincible = true;
+            lastDamageTime = Time.time;
+        }
+
+        // 無敵時間の解除
+        if (invincible && Time.time - lastDamageTime > invincibilityTime)
+        {
+            invincible = false;  // 無敵解除
         }
 
         if (damageRed)
@@ -269,8 +317,9 @@ public class PlayerMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag(goalTag))
+        if (collision.collider.CompareTag("Goal"))
         {
+            timerStop = true;
             stage1Source.Stop();
             goalSource.PlayOneShot(goalSound);
             goal.SetActive(false);
@@ -279,27 +328,40 @@ public class PlayerMove : MonoBehaviour
             goalFlag = true;
         }
 
-        if (collision.collider.CompareTag(deadTag))
+        if (collision.collider.CompareTag("Dead"))
         {
             Gamemanager.instance.life = 0;
         }
 
-        if (collision.collider.CompareTag(kuribouTag))
+        if (collision.collider.CompareTag("Kuribou"))
         {
             Debug.Log("Player hit kuribou!");
             damageFlag = true;
         }
 
-        if (collision.collider.CompareTag(dossunTag))
+        if (collision.collider.CompareTag("Dossun"))
         {
             Debug.Log("Player hit dossun!");
             damageFlag = true;
         }
 
-        if (collision.collider.CompareTag(coinTag))
+        if (collision.collider.CompareTag("Coin"))
         {
             collision.gameObject.SetActive(false);
             getCoin = true;
         }
+
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.tag);
+
+        if (collision.collider.CompareTag("moveStage1") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        {
+            SceneManager.LoadScene("Stage1");
+        }
+
+    }
+
 }

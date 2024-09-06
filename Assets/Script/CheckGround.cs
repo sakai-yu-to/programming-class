@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CheckGround : MonoBehaviour
 {
-    private string groundTag = "Ground";
     private bool isGround = false;
     private bool isGroundEnter, isGroundStay ,isGroundExit;
 
@@ -27,7 +26,7 @@ public class CheckGround : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == groundTag)
+        if(collision.tag == "Ground")
         {
             isGroundEnter = true;
         }
@@ -35,7 +34,7 @@ public class CheckGround : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.tag == groundTag)
+        if(collision.tag == "Ground")
         {
             isGroundExit = true;
         }

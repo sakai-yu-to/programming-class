@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyKill : MonoBehaviour
 {
-    private string kuribouTag = "Kuribou";
     public PlayerMove playermove;
 
     public AudioSource kurikillSource;
@@ -23,8 +22,8 @@ public class EnemyKill : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // 衝突したオブジェクトのタグが"Kuribou"か確認
-        if (other.CompareTag(kuribouTag))
+        // Check if the tag of the collided object is Kuribou
+        if (other.CompareTag("Kuribou"))
         {
             playermove.BounceOnEnemy();
             kurikillSource.PlayOneShot(kurikillClip);

@@ -8,13 +8,11 @@ public class DossunMove : MonoBehaviour
     public float fallSpeed = 5f; // 落下速度
     public float riseSpeed = 2f; // 上昇速度
     public float triggerDistance; // プレイヤーが近づく距離
-    private string groundTag = "Ground"; // GroundTag
     private Vector3 originalPosition; // ドッスンの元の位置
     private bool isFalling = false; // ドッスンが落下中かどうか
     private bool isRising = false; // ドッスンが上昇中かどうか
     private bool isWaiting = false; // 待機中かどうか
 
-    private string kuribouTag = "Kuribou";
 
 
     private Rigidbody2D rb;
@@ -74,7 +72,7 @@ public class DossunMove : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // 地面に触れたら落下を停止し、2秒待機後に上昇を開始
-        if (collision.collider.CompareTag(groundTag))
+        if (collision.collider.CompareTag("Ground"))
         {
             if (isFalling)
             {
@@ -84,10 +82,16 @@ public class DossunMove : MonoBehaviour
             }
         }
 
-        if (collision.collider.CompareTag(kuribouTag))
+        if (collision.collider.CompareTag("Kuribou"))
         {
-            collision.collider.gameObject.SetActive(false);
+            Destroy(collision.gameObject);
         }
+
+        if (collision.collider.CompareTag("Dead"))
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     IEnumerator WaitBeforeRise()

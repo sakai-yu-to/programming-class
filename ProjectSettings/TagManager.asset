@@ -19,6 +19,8 @@ TagManager:
   - Dossun
   - Goal
   - Goaled
+  - ceiling
+  - moveStage1
   layers:
   - Default
   - TransparentFX

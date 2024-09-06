@@ -10,13 +10,6 @@ public class KuribouMove : MonoBehaviour
     private Animator kuribouAnim = null;
     private Rigidbody2D kuribourb = null;
     private bool hasTouchedGround = false; // 地面に接触したかどうかを記録するフラグ
-    private string turnTag = "Turn";
-    private string groundTag = "Ground";
-    private string kuribouTag = "Kuribou";
-    private string bodyTag = "Body";
-    private string headTag = "Head";
-    private string footTag = "Foot";
-    private string death = "Dead";
     public int turn = 0;
     public float triggerDistance; // プレイヤーが近づく距離
     private Vector3 originalPosition; 
@@ -77,18 +70,18 @@ public class KuribouMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag(groundTag))
+        if (collision.collider.CompareTag("Ground"))
         {
-            hasTouchedGround = true; // GroundTagに接触したら、左右の移動を開始する
+            hasTouchedGround = true; // "Ground"に接触したら、左右の移動を開始する
         }
 
-        if (collision.collider.CompareTag(turnTag) || collision.collider.CompareTag(kuribouTag))
+        if (collision.collider.CompareTag("Turn") || collision.collider.CompareTag("Kuribou"))
         {
             turn++;
             Debug.Log("Kuribou turned");
         }
 
-        if (collision.collider.CompareTag(death))
+        if (collision.collider.CompareTag("Dead"))
         {
             Destroy(this.gameObject);
         }
