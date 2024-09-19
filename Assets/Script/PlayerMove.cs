@@ -42,19 +42,20 @@ public class PlayerMove : MonoBehaviour
     public AudioSource stage1Source;
     public AudioSource damageSource;
     public AudioSource goalSource;
+    public AudioSource gameOverSource;
 
     public AudioClip menuMusic;
     public AudioClip coinSound;
     public AudioClip stage1Music;
     public AudioClip damageSound;
     public AudioClip goalSound;
+    public AudioClip gameOverSound;
 
     public bool getCoin = false;
     public bool damageFlag = false;
     public GameObject damagePanel;
     private float damagedTime = 0.0f;
     private bool damageRed = false;
-
 
 
     private bool enemyBounce = false; 
@@ -76,6 +77,7 @@ public class PlayerMove : MonoBehaviour
     private float lastDamageTime;
     private bool invincible = false;
     public bool timerStop = false;
+    private bool gameoverFlag = false;
 
 
 
@@ -107,15 +109,30 @@ public class PlayerMove : MonoBehaviour
         anim.SetBool("jump", isJump);
         anim.SetBool("ground", isGround);
 
-        if (Gamemanager.instance.life == 0)
+        if (Input.GetKey(KeyCode.R))
         {
             isDown = true;
             down_flag = true;
-            Gamemanager.instance.life = 10;
             SceneManager.LoadScene("Menu");
         }
 
-        if(ySpeed >= jumpSpeed * 3)
+        if (Gamemanager.instance.life == 0 && !gameoverFlag)
+        {
+            isDown = true;
+            down_flag = true;
+            stage1Source.Stop();
+            gameOverSource.Play();
+            gameoverFlag = true;
+        }
+
+        if (down_time >= 2.5f)
+        {
+            SceneManager.LoadScene("Menu");
+        }
+
+
+
+        if (ySpeed >= jumpSpeed * 3)
         {
             jumpingTime += Time.deltaTime;
             if(jumpingTime > 0.5f)
@@ -180,7 +197,7 @@ public class PlayerMove : MonoBehaviour
             moveMenuTime += Time.deltaTime;
             if(moveMenuTime > 2.0f)
             {
-                SceneManager.LoadScene("Menu");
+                SceneManager.LoadScene("Score");
 
             }
         }
@@ -360,6 +377,21 @@ public class PlayerMove : MonoBehaviour
         if (collision.collider.CompareTag("moveStage1") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
             SceneManager.LoadScene("Stage1");
+        }
+
+        if (collision.collider.CompareTag("moveStage2") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        {
+            //SceneManager.LoadScene("Stage2");
+        }
+
+        if (collision.collider.CompareTag("moveStage3") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        {
+            //SceneManager.LoadScene("Stage3");
+        }
+
+        if (collision.collider.CompareTag("moveBossStage") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        {
+            //SceneManager.LoadScene("BossStage");
         }
 
     }

@@ -12,7 +12,7 @@ public class Gamemanager : MonoBehaviour
     public float Stage1totalTime = 200.0f;
     public float clearTime;
 
-    public float highestScore1;
+    public float highestScore1 = 0.0f;
 
 
 
@@ -39,5 +39,9 @@ public class Gamemanager : MonoBehaviour
     void Update()
     {
         
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 }

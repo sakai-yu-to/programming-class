@@ -21,6 +21,9 @@ TagManager:
   - Goaled
   - ceiling
   - moveStage1
+  - moveStage2
+  - moveStage3
+  - moveBossStage
   layers:
   - Default
   - TransparentFX
