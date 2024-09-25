@@ -123,6 +123,12 @@ public class PlayerMove : MonoBehaviour
             SceneManager.LoadScene("Menu");
         }
 
+        if(transform.position.y > 11)
+        {
+            transform.position = new Vector3(transform.position.x, 10, transform.position.z);
+
+        }
+
         if (Gamemanager.instance.life == 0 && !gameoverFlag)
         {
             isDown = true;
