@@ -79,6 +79,7 @@ public class PlayerMove : MonoBehaviour
     public bool timerStop = false;
     private bool gameoverFlag = false;
 
+    private Vector3 originalPosition;
 
 
     void Start()
@@ -99,9 +100,15 @@ public class PlayerMove : MonoBehaviour
             stage1Source.clip = stage1Music;
 
         }
+        else if(sceneName == "Stage2")
+        {
+            stage1Source.clip = stage1Music;
+        }
         stage1Source.Play();
         damagePanel.SetActive(false);
         goaled.SetActive(false);
+        originalPosition = transform.position; 
+
     }
 
     void Update()
@@ -362,6 +369,13 @@ public class PlayerMove : MonoBehaviour
             damageFlag = true;
         }
 
+        if (collision.collider.CompareTag("Pakkun"))
+        {
+            Debug.Log("Player hit pakkun!");
+            damageFlag = true;
+        }
+
+
         if (collision.collider.CompareTag("Coin"))
         {
             collision.gameObject.SetActive(false);
@@ -381,19 +395,26 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.collider.CompareTag("moveStage2") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
-            //SceneManager.LoadScene("Stage2");
+            SceneManager.LoadScene("Stage2");
         }
 
         if (collision.collider.CompareTag("moveStage3") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
-            //SceneManager.LoadScene("Stage3");
+            SceneManager.LoadScene("Stage3");
         }
 
-        if (collision.collider.CompareTag("moveBossStage") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        if (collision.collider.CompareTag("moveStart") && ( Input.GetKey(KeyCode.D)  || Input.GetKey(KeyCode.RightArrow)))
         {
-            //SceneManager.LoadScene("BossStage");
+            transform.position = new Vector3(originalPosition.x, originalPosition.y, transform.position.z);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("moveBossStage") && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+        {
+            SceneManager.LoadScene("BossStage");
         }
 
     }
-
 }

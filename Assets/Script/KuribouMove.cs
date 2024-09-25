@@ -21,10 +21,6 @@ public class KuribouMove : MonoBehaviour
         originalPosition = transform.position; // Œ³‚ÌˆÊ’u‚ð•Û‘¶
         kuribourb = GetComponent<Rigidbody2D>();
         kuribouAnim = GetComponent<Animator>();
-        if (player == null)
-        {
-            Debug.LogError("Player GameObject is not assigned in the inspector.");
-        }
     }
 
     void Update()

@@ -19,6 +19,20 @@ public class TimeCounter : MonoBehaviour
         {
             remainingTime = Gamemanager.instance.Stage1totalTime;
         }
+        if(sceneName == "Stage2")
+        {
+            remainingTime = Gamemanager.instance.Stage1totalTime;
+        }
+        if (sceneName == "Stage3")
+        {
+            remainingTime = Gamemanager.instance.Stage1totalTime;
+        }
+        if (sceneName == "BossStage")
+        {
+            remainingTime = Gamemanager.instance.Stage1totalTime;
+        }
+
+
     }
 
     // Update is called once per frame
