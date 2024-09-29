@@ -21,15 +21,15 @@ public class TimeCounter : MonoBehaviour
         }
         if(sceneName == "Stage2")
         {
-            remainingTime = Gamemanager.instance.Stage1totalTime;
+            remainingTime = Gamemanager.instance.Stage2totalTime;
         }
         if (sceneName == "Stage3")
         {
-            remainingTime = Gamemanager.instance.Stage1totalTime;
+            remainingTime = Gamemanager.instance.Stage3totalTime;
         }
         if (sceneName == "BossStage")
         {
-            remainingTime = Gamemanager.instance.Stage1totalTime;
+            remainingTime = Gamemanager.instance.Stage4totalTime;
         }
 
 

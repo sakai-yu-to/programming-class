@@ -30,10 +30,11 @@ public class DossunMove : MonoBehaviour
     {
         if (!isFalling && !isRising && !isWaiting)
         {
-            float distanceToPlayer = Mathf.Abs(player.transform.position.x - transform.position.x);
+            float distanceToPlayerX = Mathf.Abs(player.transform.position.x - transform.position.x);
+            float distanceToPlayerY = transform.position.y - player.transform.position.y;
 
             // プレイヤーが近づいたら落下を開始
-            if (distanceToPlayer <= triggerDistance)
+            if ((distanceToPlayerX <= triggerDistance) && distanceToPlayerY > 0)
             {
                 isFalling = true;
             }
@@ -47,6 +48,8 @@ public class DossunMove : MonoBehaviour
         {
             Rise();
         }
+
+
     }
 
     void Fall()
@@ -60,11 +63,10 @@ public class DossunMove : MonoBehaviour
         // ドッスンを上限の高さまで上昇させる
         rb.velocity = Vector2.up * riseSpeed;
 
-        // Y座標が元の位置に近づいたら、X座標を調整しながら停止する
         if (transform.position.y >= originalPosition.y)
         {
             rb.velocity = Vector2.zero;
-            transform.position = new Vector3(originalPosition.x, originalPosition.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, originalPosition.y, transform.position.z);
             isRising = false;
         }
     }
@@ -72,7 +74,7 @@ public class DossunMove : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // 地面に触れたら落下を停止し、2秒待機後に上昇を開始
-        if (collision.collider.CompareTag("Ground"))
+        if (collision.collider.CompareTag("Ground") || collision.collider.CompareTag("breakGround"))
         {
             if (isFalling)
             {
@@ -101,4 +103,5 @@ public class DossunMove : MonoBehaviour
         isWaiting = false;
         isRising = true;
     }
+
 }

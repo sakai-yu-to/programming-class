@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 using System.Linq.Expressions;
+using System.Xml.Serialization;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -39,17 +40,20 @@ public class PlayerMove : MonoBehaviour
     public TileBase coinedBlockTile;
 
     public AudioSource coinSource;
-    public AudioSource stage1Source;
     public AudioSource damageSource;
     public AudioSource goalSource;
     public AudioSource gameOverSource;
+    public AudioSource dokanSource;
+    public AudioSource jumpSource;
 
-    public AudioClip menuMusic;
+
     public AudioClip coinSound;
     public AudioClip stage1Music;
     public AudioClip damageSound;
     public AudioClip goalSound;
     public AudioClip gameOverSound;
+    public AudioClip dokanSound;
+    public AudioClip jumpSound;
 
     public bool getCoin = false;
     public bool damageFlag = false;
@@ -81,6 +85,13 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 originalPosition;
 
+    private bool moveStartFlag = false;
+    private float moveStartTime = 0.0f;
+
+    private bool jumpFlag = false;
+    private bool dokanSoundFlag = false;
+
+    public  bool hitDossunFlag = false;
 
     void Start()
     {
@@ -89,25 +100,10 @@ public class PlayerMove : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         down_time = 0;
-        string sceneName = SceneManager.GetActiveScene().name;
-        if (sceneName == "Menu")
-        {
-            stage1Source.clip = menuMusic;
-
-        }
-        else if(sceneName == "Stage1")
-        {
-            stage1Source.clip = stage1Music;
-
-        }
-        else if(sceneName == "Stage2")
-        {
-            stage1Source.clip = stage1Music;
-        }
-        stage1Source.Play();
         damagePanel.SetActive(false);
         goaled.SetActive(false);
-        originalPosition = transform.position; 
+        originalPosition = transform.position;
+        Gamemanager.instance.startBgm = true;
 
     }
 
@@ -120,26 +116,30 @@ public class PlayerMove : MonoBehaviour
         {
             isDown = true;
             down_flag = true;
+            Gamemanager.instance.playStage = 0;
             SceneManager.LoadScene("Menu");
         }
 
         if(transform.position.y > 11)
         {
             transform.position = new Vector3(transform.position.x, 10, transform.position.z);
-
+            ySpeed = -gravity;
         }
 
         if (Gamemanager.instance.life == 0 && !gameoverFlag)
         {
             isDown = true;
             down_flag = true;
-            stage1Source.Stop();
+            Gamemanager.instance.stageSource.Stop();
             gameOverSource.Play();
             gameoverFlag = true;
+            Collider2D col = GetComponent<Collider2D>();
+            col.isTrigger = true;
         }
 
         if (down_time >= 2.5f)
         {
+            Gamemanager.instance.playStage = 0;
             SceneManager.LoadScene("Menu");
         }
 
@@ -229,6 +229,8 @@ public class PlayerMove : MonoBehaviour
                     isJump = true;
                     ySpeed = jumpSpeed * 3;
                     jumpPos = transform.position.y;
+
+
                 }
                 else
                 {
@@ -282,12 +284,25 @@ public class PlayerMove : MonoBehaviour
                 xSpeed = 0.0f;
             }
 
+            if (hitDossunFlag && !isGround)
+            {
+                xSpeed = 0.0f;
+                ySpeed = -gravity;
+            }
+
+
             rb.velocity = new Vector2(xSpeed, ySpeed);
         }
         else
         {
             rb.velocity = new Vector2(0, -gravity);
         }
+
+        if (isGround && hitDossunFlag)
+        {
+            hitDossunFlag = false;
+        }
+
         if (down_flag)
         {
             down_time += Time.deltaTime;
@@ -333,6 +348,34 @@ public class PlayerMove : MonoBehaviour
                 damageRed = false;
             }
         }
+
+        if (moveStartFlag)
+        {
+            isDown = true;
+            moveStartTime += Time.deltaTime;
+            rb.velocity = new Vector2(2, 0);
+            if (moveStartTime > 2.0f)
+            {
+                dokanSoundFlag = false;
+                isDown = false;
+                moveStartTime = 0.0f;
+                moveStartFlag = false;
+                transform.position = new Vector3(originalPosition.x, originalPosition.y, transform.position.z);
+            }
+
+        }
+
+        if (ySpeed > 0 && !jumpFlag)
+        {
+            jumpSource.PlayOneShot(jumpSound);
+            jumpFlag = true;
+        }
+        else if(ySpeed < 0)
+        {
+            jumpFlag = false;
+        }
+
+
     }
 
     public void BounceOnEnemy()
@@ -350,7 +393,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.collider.CompareTag("Goal"))
         {
             timerStop = true;
-            stage1Source.Stop();
+            Gamemanager.instance.stageSource.Stop();
             goalSource.PlayOneShot(goalSound);
             goal.SetActive(false);
             goaled.SetActive(true);
@@ -396,31 +439,46 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.collider.CompareTag("moveStage1") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
+            Gamemanager.instance.playStage = 1;
             SceneManager.LoadScene("Stage1");
         }
 
         if (collision.collider.CompareTag("moveStage2") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
+            Gamemanager.instance.playStage = 2;
             SceneManager.LoadScene("Stage2");
         }
 
         if (collision.collider.CompareTag("moveStage3") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
+            Gamemanager.instance.playStage = 3;
             SceneManager.LoadScene("Stage3");
         }
-
+        /*
         if (collision.collider.CompareTag("moveStart") && ( Input.GetKey(KeyCode.D)  || Input.GetKey(KeyCode.RightArrow)))
         {
             transform.position = new Vector3(originalPosition.x, originalPosition.y, transform.position.z);
         }
+        */
     }
+
+    
+    
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("moveBossStage") && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
         {
+
+            Gamemanager.instance.playStage = 4;
             SceneManager.LoadScene("BossStage");
         }
 
+        if(other.gameObject.CompareTag("moveStart") && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !dokanSoundFlag)
+        {
+            dokanSource.Play();
+            moveStartFlag = true;
+        }
     }
+
 }

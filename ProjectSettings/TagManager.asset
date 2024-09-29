@@ -26,11 +26,13 @@ TagManager:
   - moveBossStage
   - Pakkun
   - moveStart
+  - hiddenGround
+  - breakGround
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - kuribou
   - Water
   - UI
   - map

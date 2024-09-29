@@ -8,6 +8,9 @@ public class EnemyKill : MonoBehaviour
 
     public AudioSource kurikillSource;
     public AudioClip kurikillClip;
+
+    public AudioSource breakSource;
+    public AudioClip breakClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,11 @@ public class EnemyKill : MonoBehaviour
             kurikillSource.PlayOneShot(kurikillClip);
             Destroy(other.gameObject);
             Debug.Log("Kuribou defeated by CheckGround");
+        }
+
+        if (other.CompareTag("breakGround"))
+        {
+            breakSource.Play();
         }
     }
 }

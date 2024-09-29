@@ -23,6 +23,13 @@ public class HeadCollision : MonoBehaviour
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Action(hitPoint);
         }
+
+        if (other.CompareTag("Dossun"))
+        {
+            playermove.hitDossunFlag = true;
+            Debug.Log("Player hit Dossun! hitDossunFlag set to true");
+        }
+
     }
 
     private void Action(Vector3 hitPoint)

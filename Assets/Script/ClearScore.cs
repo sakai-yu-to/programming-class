@@ -64,11 +64,13 @@ public class ClearScore : MonoBehaviour
             }
             else
             {
+                Gamemanager.instance.playStage = 0;
+                Gamemanager.instance.startBgm = true;
                 SceneManager.LoadScene("Menu");
             }
         }
 
-        resultText[4].text = Gamemanager.instance.highestScore1.ToString("F2");
+        resultText[4].text = Gamemanager.instance.highestScore[Gamemanager.instance.playStage].ToString("F2");
         resultTime += Time.deltaTime;
         //‚»‚ê‚¼‚ê‚É‚¨‚¢‚Ä‰¹‚ð–Â‚ç‚·
         if (resultTime > 1.0f)
@@ -96,11 +98,11 @@ public class ClearScore : MonoBehaviour
         {
             highscoreFlag = true;
             pressSpace.SetActive(true);
-            if (totalScore > Gamemanager.instance.highestScore1)
+            if (totalScore > Gamemanager.instance.highestScore[Gamemanager.instance.playStage])
             {
                 newRecord.SetActive(true);
                 highscoreSource.PlayOneShot(highscoreSound);
-                Gamemanager.instance.highestScore1 = totalScore;
+                Gamemanager.instance.highestScore[Gamemanager.instance.playStage] = totalScore;
             }
 
         }
