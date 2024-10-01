@@ -28,6 +28,8 @@ TagManager:
   - moveStart
   - hiddenGround
   - breakGround
+  - Killer
+  - changeMode
   layers:
   - Default
   - TransparentFX
@@ -39,7 +41,7 @@ TagManager:
   - pakkun
   - coin
   - dossun
-  - 
+  - killer
   - 
   - 
   - 

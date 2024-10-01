@@ -4017,6 +4017,8 @@ MonoBehaviour:
   gravity: 7
   jumpHeight: 4
   bounceHeight: 1
+  killKuribouHeight: 1
+  killKillerHeight: 4
   bounceSpeed: 15
   ground: {fileID: 972961975}
   head: {fileID: 120286472}
@@ -4048,6 +4050,8 @@ MonoBehaviour:
   invincibilityTime: 2
   timerStop: 0
   hitDossunFlag: 0
+  killKuribou: 0
+  killKiller: 0
 --- !u!4 &338467586
 Transform:
   m_ObjectHideFlags: 0
@@ -8533,7 +8537,7 @@ Transform:
   m_GameObject: {fileID: 975763619}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6022949, y: 0.9999995, z: -10}
+  m_LocalPosition: {x: 0.6081085, y: 0.9999995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16855,7 +16859,7 @@ MonoBehaviour:
   - {fileID: 1097657337}
   - {fileID: 2042078899}
   - {fileID: 2130384853}
-  triggerDistance: 1
+  triggerDistance: 20
 --- !u!1 &1579972704
 GameObject:
   m_ObjectHideFlags: 0

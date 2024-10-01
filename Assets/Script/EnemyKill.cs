@@ -28,10 +28,18 @@ public class EnemyKill : MonoBehaviour
         // Check if the tag of the collided object is Kuribou
         if (other.CompareTag("Kuribou"))
         {
+            playermove.killKuribou = true;
             playermove.BounceOnEnemy();
             kurikillSource.PlayOneShot(kurikillClip);
             Destroy(other.gameObject);
             Debug.Log("Kuribou defeated by CheckGround");
+        }
+
+        if (other.CompareTag("Killer"))
+        {
+            playermove.killKiller = true;   
+            playermove.BounceOnEnemy();
+            Destroy(other.gameObject);
         }
 
         if (other.CompareTag("breakGround"))

@@ -11,7 +11,10 @@ public class PlayerMove : MonoBehaviour
     public float jumpSpeed;
     public float gravity;
     public float jumpHeight;
-    public float bounceHeight; 
+    public float bounceHeight;
+    public float killKuribouHeight = 1.0f;
+    public float killKillerHeight = 4.0f;
+
     public float bounceSpeed; 
     public CheckGround ground;
     public CheckGround head;
@@ -93,6 +96,9 @@ public class PlayerMove : MonoBehaviour
 
     public  bool hitDossunFlag = false;
 
+    public bool killKuribou = false;
+    public bool killKiller = false;
+
     void Start()
     {
         Gamemanager.instance.life = 10;
@@ -120,11 +126,6 @@ public class PlayerMove : MonoBehaviour
             SceneManager.LoadScene("Menu");
         }
 
-        if(transform.position.y > 11)
-        {
-            transform.position = new Vector3(transform.position.x, 10, transform.position.z);
-            ySpeed = -gravity;
-        }
 
         if (Gamemanager.instance.life == 0 && !gameoverFlag)
         {
@@ -298,6 +299,13 @@ public class PlayerMove : MonoBehaviour
             rb.velocity = new Vector2(0, -gravity);
         }
 
+        if (transform.position.y > 11)
+        {
+            transform.position = new Vector3(transform.position.x, 10, transform.position.z);
+            rb.velocity = new Vector2(0, -gravity);
+        }
+
+
         if (isGround && hitDossunFlag)
         {
             hitDossunFlag = false;
@@ -381,6 +389,19 @@ public class PlayerMove : MonoBehaviour
     public void BounceOnEnemy()
     {
         Debug.Log("jump by kill");
+
+        if (killKuribou)
+        {
+            bounceHeight = killKuribouHeight;
+            killKuribou = false;
+        }
+
+        if (killKiller)
+        {
+            bounceHeight = killKillerHeight; 
+            killKiller = false;
+        }
+
         bounceStartPos = transform.position.y; // バウンス開始時の高さを記録
         ySpeed = bounceSpeed; // バウンス用の速度を設定
         isJump = true; // ジャンプフラグを立てる
@@ -417,6 +438,15 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("Player hit dossun!");
             damageFlag = true;
         }
+
+
+        if (collision.collider.CompareTag("Killer"))
+        {
+            Debug.Log("Player hit killer!");
+            isJump = false;
+            damageFlag = true;
+        }
+
 
         if (collision.collider.CompareTag("Pakkun"))
         {
@@ -462,8 +492,16 @@ public class PlayerMove : MonoBehaviour
         */
     }
 
-    
-    
+    /*
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("killer") && !killKiller)
+        {
+            Debug.Log("Player hit killer!");
+            damageFlag = true;
+        }
+    }
+    */
 
     private void OnTriggerStay2D(Collider2D other)
     {

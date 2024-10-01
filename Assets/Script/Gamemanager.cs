@@ -31,6 +31,7 @@ public class Gamemanager : MonoBehaviour
 
     public bool startBgm = false;
 
+    public bool isHard = false;
     private void Awake()
     {
         if (instance == null)

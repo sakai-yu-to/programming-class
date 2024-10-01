@@ -5,6 +5,7 @@ using UnityEngine;
 public class Menukey : MonoBehaviour
 {
     public GameObject[] pressKey;
+    public GameObject hardImage;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,16 @@ public class Menukey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Gamemanager.instance.isHard)
+        {
+            hardImage.SetActive(true);
+        }
+        else
+        {
+            hardImage.SetActive(false);
+        }
+
+
         if (Input.GetKey(KeyCode.W))
         {
             pressKey[0].SetActive(true);

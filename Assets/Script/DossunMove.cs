@@ -24,6 +24,13 @@ public class DossunMove : MonoBehaviour
 
         // Z軸の回転をロックしてドッスンが傾かないようにする
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        player = GameObject.Find("Player");  // プレイヤーを探す
+
+        if (!Gamemanager.instance.isHard)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void Update()
