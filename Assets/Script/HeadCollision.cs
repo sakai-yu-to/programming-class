@@ -36,6 +36,12 @@ public class HeadCollision : MonoBehaviour
             Debug.Log(Gamemanager.instance.isHard);
         }
 
+        if (other.CompareTag("Killer"))
+        {
+            playermove.enemyBounce = false;
+            playermove.isJump = false;
+        }
+
     }
 
     private void Action(Vector3 hitPoint)

@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
     private bool isGround = false;
     private bool isHead = false;
 
-    private bool isJump = false;
+    public bool isJump = false;
     private float jumpPos = 0.0f;
     private float bounceStartPos = 0.0f; 
 
@@ -65,7 +65,7 @@ public class PlayerMove : MonoBehaviour
     private bool damageRed = false;
 
 
-    private bool enemyBounce = false; 
+    public bool enemyBounce = false; 
 
     private bool goalFlag = false;
     public GameObject goal;
@@ -278,7 +278,7 @@ public class PlayerMove : MonoBehaviour
                 transform.localScale = new Vector3(-1.3f, 1.3f, 1.3f);
                 anim.SetBool("run", true);
                 xSpeed = -speed;
-            }
+              }
             else
             {
                 anim.SetBool("run", false);
@@ -303,6 +303,7 @@ public class PlayerMove : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, 10, transform.position.z);
             rb.velocity = new Vector2(0, -gravity);
+            enemyBounce = false;
         }
 
 
@@ -469,19 +470,16 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.collider.CompareTag("moveStage1") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
-            Gamemanager.instance.playStage = 1;
             SceneManager.LoadScene("Stage1");
         }
 
         if (collision.collider.CompareTag("moveStage2") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
-            Gamemanager.instance.playStage = 2;
             SceneManager.LoadScene("Stage2");
         }
 
         if (collision.collider.CompareTag("moveStage3") && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
-            Gamemanager.instance.playStage = 3;
             SceneManager.LoadScene("Stage3");
         }
         /*
@@ -508,7 +506,6 @@ public class PlayerMove : MonoBehaviour
         if (other.gameObject.CompareTag("moveBossStage") && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
         {
 
-            Gamemanager.instance.playStage = 4;
             SceneManager.LoadScene("BossStage");
         }
 

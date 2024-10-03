@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4001143450748339874}
   - component: {fileID: 2111963338149533298}
   - component: {fileID: 7303995124051821442}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mace
   m_TagString: Dossun
   m_Icon: {fileID: 0}

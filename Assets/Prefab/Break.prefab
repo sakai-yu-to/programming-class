@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5115153597419716051}
   - component: {fileID: 1619330526189837319}
   - component: {fileID: 1209835653618329906}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Break
   m_TagString: breakGround
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 1719010915
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e39febd05ac08a54e89646a92cbbdc7e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c430f75636aca6442ae7ced8622eea48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,8 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 0}
-  breakSound: {fileID: 1209835653618329906}
-  breakclip: {fileID: 8300000, guid: 1eb9c8086d9f19546a9010f20457f7a4, type: 3}
 --- !u!82 &1209835653618329906
 AudioSource:
   m_ObjectHideFlags: 0

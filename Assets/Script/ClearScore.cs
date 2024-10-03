@@ -31,6 +31,7 @@ public class ClearScore : MonoBehaviour
     public GameObject newRecord;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,13 +65,18 @@ public class ClearScore : MonoBehaviour
             }
             else
             {
-                Gamemanager.instance.playStage = 0;
                 Gamemanager.instance.startBgm = true;
                 SceneManager.LoadScene("Menu");
+                Gamemanager.instance.playStage = 0;
             }
         }
 
-        resultText[4].text = Gamemanager.instance.highestScore[Gamemanager.instance.playStage].ToString("F2");
+        if(Gamemanager.instance.playStage != 0)
+        {
+            resultText[4].text = Gamemanager.instance.highestScore[Gamemanager.instance.playStage].ToString("F2");
+
+        }
+
         resultTime += Time.deltaTime;
         //‚»‚ê‚¼‚ê‚É‚¨‚¢‚Ä‰¹‚ð–Â‚ç‚·
         if (resultTime > 1.0f)

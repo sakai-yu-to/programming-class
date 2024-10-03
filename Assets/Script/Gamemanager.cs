@@ -71,22 +71,27 @@ public class Gamemanager : MonoBehaviour
             if(sceneName == "Menu")
             {
                 stageSource.clip = menuMusic;
+                playStage = 0;
             }
             if (sceneName == "Stage1")
             {
                 stageSource.clip = stage1Music;
+                playStage = 1;
             }
             if (sceneName == "Stage2")
             {
                 stageSource.clip = stage2Music;
+                playStage = 2;
             }
             if (sceneName == "Stage3")
             {
                 stageSource.clip = stage3Music;
+                playStage = 3;
             }
             if (sceneName == "BossStage")
             {
                 stageSource.clip = stage4Music;
+                playStage = 4;
             }
 
             stageSource.Play();
