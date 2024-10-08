@@ -30,6 +30,8 @@ TagManager:
   - breakGround
   - Killer
   - changeMode
+  - FlyingKuribou
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -42,7 +44,7 @@ TagManager:
   - coin
   - dossun
   - killer
-  - 
+  - gear
   - 
   - 
   - 

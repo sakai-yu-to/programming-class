@@ -18,6 +18,7 @@ public class Menukey : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Gamemanager.instance.isHard)
         {
             hardImage.SetActive(true);
@@ -26,6 +27,7 @@ public class Menukey : MonoBehaviour
         {
             hardImage.SetActive(false);
         }
+        
 
 
         if (Input.GetKey(KeyCode.W))

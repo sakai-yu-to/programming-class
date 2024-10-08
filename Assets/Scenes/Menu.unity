@@ -4998,6 +4998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 138f6afd6b77da84ab3a202ddec94ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hardImage: {fileID: 315419898}
   jumpSpeed: 15
   gravity: 7
   jumpHeight: 4
@@ -5007,6 +5008,8 @@ MonoBehaviour:
   bounceSpeed: 15
   ground: {fileID: 1556986245}
   head: {fileID: 1610205282}
+  isGround: 0
+  isJump: 0
   speed: 10
   xSpeed: 0
   ySpeed: 0
@@ -5029,6 +5032,7 @@ MonoBehaviour:
   getCoin: 0
   damageFlag: 0
   damagePanel: {fileID: 158648226}
+  enemyBounce: 0
   goal: {fileID: 2056149333}
   goaled: {fileID: 936871680}
   finish: 0

@@ -8,6 +8,8 @@ using System.Xml.Serialization;
 
 public class PlayerMove : MonoBehaviour
 {
+    public GameObject hardImage;
+
     public float jumpSpeed;
     public float gravity;
     public float jumpHeight;
@@ -21,7 +23,7 @@ public class PlayerMove : MonoBehaviour
 
     private Animator anim = null;
     private Rigidbody2D rb = null;
-    private bool isGround = false;
+    public bool isGround = false;
     private bool isHead = false;
 
     public bool isJump = false;
@@ -99,6 +101,7 @@ public class PlayerMove : MonoBehaviour
     public bool killKuribou = false;
     public bool killKiller = false;
 
+    private SpriteRenderer spriteRenderer;
     void Start()
     {
         Gamemanager.instance.life = 10;
@@ -110,6 +113,15 @@ public class PlayerMove : MonoBehaviour
         goaled.SetActive(false);
         originalPosition = transform.position;
         Gamemanager.instance.startBgm = true;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (Gamemanager.instance.isHard)
+        {
+            hardImage.SetActive(true);
+        }
+        else
+        {
+            hardImage.SetActive(false);
+        }
 
     }
 
@@ -129,6 +141,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Gamemanager.instance.life == 0 && !gameoverFlag)
         {
+            transform.localScale = new Vector3(1.3f, -1.3f, 1.3f);
             isDown = true;
             down_flag = true;
             Gamemanager.instance.stageSource.Stop();
@@ -342,9 +355,19 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 無敵時間の解除
-        if (invincible && Time.time - lastDamageTime > invincibilityTime)
+        if (invincible)
         {
-            invincible = false;  // 無敵解除
+            float timeSinceDamage = Time.time - lastDamageTime;
+            if (timeSinceDamage > invincibilityTime)
+            {
+                invincible = false;  // 無敵解除
+                spriteRenderer.enabled = true;  // 最後に点滅を解除し、表示を元に戻す
+            }
+            else
+            {
+                // 点滅処理：タイムスケールを利用してスプライトを表示・非表示に切り替え
+                spriteRenderer.enabled = Mathf.FloorToInt(timeSinceDamage * 10) % 2 == 0;
+            }
         }
 
         if (damageRed)
@@ -423,43 +446,47 @@ public class PlayerMove : MonoBehaviour
             goalFlag = true;
         }
 
-        if (collision.collider.CompareTag("Dead"))
+        if(!finish)
         {
-            Gamemanager.instance.life = 0;
-        }
+            if (collision.collider.CompareTag("Dead"))
+            {
+                Gamemanager.instance.life = 0;
+            }
 
-        if (collision.collider.CompareTag("Kuribou"))
-        {
-            Debug.Log("Player hit kuribou!");
-            damageFlag = true;
-        }
+            if (collision.collider.CompareTag("Kuribou"))
+            {
+                Debug.Log("Player hit kuribou!");
+                damageFlag = true;
+            }
 
-        if (collision.collider.CompareTag("Dossun"))
-        {
-            Debug.Log("Player hit dossun!");
-            damageFlag = true;
-        }
-
-
-        if (collision.collider.CompareTag("Killer"))
-        {
-            Debug.Log("Player hit killer!");
-            isJump = false;
-            damageFlag = true;
-        }
+            if (collision.collider.CompareTag("Dossun"))
+            {
+                Debug.Log("Player hit dossun!");
+                damageFlag = true;
+            }
 
 
-        if (collision.collider.CompareTag("Pakkun"))
-        {
-            Debug.Log("Player hit pakkun!");
-            damageFlag = true;
-        }
+            if (collision.collider.CompareTag("Killer"))
+            {
+                Debug.Log("Player hit killer!");
+                isJump = false;
+                damageFlag = true;
+            }
 
 
-        if (collision.collider.CompareTag("Coin"))
-        {
-            collision.gameObject.SetActive(false);
-            getCoin = true;
+            if (collision.collider.CompareTag("Pakkun"))
+            {
+                Debug.Log("Player hit pakkun!");
+                damageFlag = true;
+            }
+
+
+            if (collision.collider.CompareTag("Coin"))
+            {
+                collision.gameObject.SetActive(false);
+                getCoin = true;
+            }
+
         }
 
     }
@@ -509,11 +536,21 @@ public class PlayerMove : MonoBehaviour
             SceneManager.LoadScene("BossStage");
         }
 
-        if(other.gameObject.CompareTag("moveStart") && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !dokanSoundFlag)
+        if(!finish)
         {
-            dokanSource.Play();
-            moveStartFlag = true;
+            if (other.gameObject.CompareTag("moveStart") && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !dokanSoundFlag)
+            {
+                dokanSource.Play();
+                moveStartFlag = true;
+            }
+
+            if (other.gameObject.CompareTag("Fire"))
+            {
+                Debug.Log("Player hit Fire!");
+                damageFlag = true;
+            }
         }
+
     }
 
 }

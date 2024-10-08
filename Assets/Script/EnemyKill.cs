@@ -35,7 +35,7 @@ public class EnemyKill : MonoBehaviour
             Debug.Log("Kuribou defeated by CheckGround");
         }
 
-        if (other.CompareTag("Killer"))
+        if (other.CompareTag("Killer") || other.CompareTag("FlyingKuribou"))
         {
             playermove.killKiller = true;   
             playermove.BounceOnEnemy();

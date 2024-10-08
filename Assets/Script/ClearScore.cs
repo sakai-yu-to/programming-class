@@ -30,11 +30,21 @@ public class ClearScore : MonoBehaviour
     public GameObject pressSpace;
     public GameObject newRecord;
 
+    public GameObject hardImage;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        if (Gamemanager.instance.isHard)
+        {
+            hardImage.SetActive(true);
+        }
+        else
+        {
+            hardImage.SetActive(false);
+        }
+
         pressSpace.SetActive(false);
         newRecord.SetActive(false);
 

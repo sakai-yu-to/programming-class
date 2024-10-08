@@ -30,7 +30,7 @@ public class HeadCollision : MonoBehaviour
             Debug.Log("Player hit Dossun! hitDossunFlag set to true");
         }
 
-        if (other.CompareTag("changeMode"))
+        if (other.CompareTag("changeMode") && playermove.ySpeed > 0)
         {
             Gamemanager.instance.isHard = !Gamemanager.instance.isHard;
             Debug.Log(Gamemanager.instance.isHard);
