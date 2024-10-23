@@ -8,13 +8,17 @@ public class EnemyKill : MonoBehaviour
 
     public AudioSource kurikillSource;
     public AudioClip kurikillClip;
-
+    
     public AudioSource breakSource;
     public AudioClip breakClip;
+
+    public int killHammer = 0;
+
+    public bool touchLamp = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        killHammer = 0;
     }
 
     // Update is called once per frame
@@ -28,12 +32,17 @@ public class EnemyKill : MonoBehaviour
         // Check if the tag of the collided object is Kuribou
         if (other.CompareTag("Kuribou"))
         {
-            playermove.killKuribou = true;
-            playermove.BounceOnEnemy();
-            kurikillSource.PlayOneShot(kurikillClip);
+            killKuribou();
             Destroy(other.gameObject);
-            Debug.Log("Kuribou defeated by CheckGround");
         }
+
+        if (other.CompareTag("HammerBro"))
+        {
+            killKuribou();
+            Destroy(other.gameObject);
+            killHammer++;
+        }
+
 
         if (other.CompareTag("Killer") || other.CompareTag("FlyingKuribou"))
         {
@@ -46,5 +55,21 @@ public class EnemyKill : MonoBehaviour
         {
             breakSource.Play();
         }
+
+        if (other.CompareTag("BossLamp"))
+        {
+            killKuribou();
+            Debug.Log("hit bossLamp");
+            touchLamp = true;
+        }
+    }
+
+    void killKuribou()
+    {
+        playermove.killKuribou = true;
+        playermove.BounceOnEnemy();
+        kurikillSource.PlayOneShot(kurikillClip);
+        Debug.Log("Kuribou defeated by CheckGround");
+
     }
 }

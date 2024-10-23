@@ -42,7 +42,7 @@ public class FireMove : MonoBehaviour
         if (isRising)
         {
             rb.velocity = Vector2.up * riseSpeed;
-
+            transform.localScale = new Vector3(0.25f, -0.25f, 0.25f);
             // 指定の高さに達したら落下開始
             if (transform.position.y >= originalY + riseHeight)
             {
@@ -53,7 +53,7 @@ public class FireMove : MonoBehaviour
         else if (isFalling)
         {
             rb.velocity = Vector2.down * fallSpeed;
-
+            transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
             // 元のY座標まで戻ったら停止して待機状態へ移行
             if (transform.position.y <= originalY)
             {

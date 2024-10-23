@@ -266,6 +266,7 @@ public class PlayerMove : MonoBehaviour
             }
             else if (isJump)
             {
+                isGround = false;
                 if (((Input.GetKey(KeyCode.UpArrow)) || (Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.Space))) && (jumpPos + jumpHeight) > transform.position.y && !isHead)
                 {
                     ySpeed = jumpSpeed;
@@ -341,7 +342,7 @@ public class PlayerMove : MonoBehaviour
         {
             damageFlag = false;
         }
-        if (damageFlag && !invincible)
+        if (damageFlag && !invincible && Gamemanager.instance.life > 0)
         {
 
             Gamemanager.instance.life--;
@@ -458,6 +459,13 @@ public class PlayerMove : MonoBehaviour
                 Debug.Log("Player hit kuribou!");
                 damageFlag = true;
             }
+
+            if (collision.collider.CompareTag("HammerBro"))
+            {
+                Debug.Log("Player hit HammerBro!");
+                damageFlag = true;
+            }
+
 
             if (collision.collider.CompareTag("Dossun"))
             {
