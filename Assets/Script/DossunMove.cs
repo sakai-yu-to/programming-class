@@ -19,20 +19,15 @@ public class DossunMove : MonoBehaviour
 
     void Start()
     {
-        originalPosition = transform.position; // 元の位置を保存
+        originalPosition = transform.position; 
         rb = GetComponent<Rigidbody2D>();
-
-        // Z軸の回転をロックしてドッスンが傾かないようにする
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-        player = GameObject.Find("Player");  // プレイヤーを探す
-
+        player = GameObject.Find("Player"); 
         if (!Gamemanager.instance.isHard)
         {
             Destroy(this.gameObject);
         }
     }
-
     void Update()
     {
         if (!isFalling && !isRising && !isWaiting)
@@ -40,7 +35,6 @@ public class DossunMove : MonoBehaviour
             float distanceToPlayerX = Mathf.Abs(player.transform.position.x - transform.position.x);
             float distanceToPlayerY = transform.position.y - player.transform.position.y;
 
-            // プレイヤーが近づいたら落下を開始
             if ((distanceToPlayerX <= triggerDistance) && distanceToPlayerY > 0)
             {
                 isFalling = true;
@@ -49,33 +43,21 @@ public class DossunMove : MonoBehaviour
 
         if (isFalling)
         {
-            Fall();
+            rb.velocity = Vector2.down * fallSpeed;
         }
         else if (isRising)
         {
-            Rise();
+            rb.velocity = Vector2.up * riseSpeed;
+
+            if (transform.position.y >= originalPosition.y)
+            {
+                rb.velocity = Vector2.zero;
+                transform.position = new Vector3(transform.position.x, originalPosition.y, transform.position.z);
+                isRising = false;
+            }
         }
 
 
-    }
-
-    void Fall()
-    {
-        // ドッスンを落下させる（Rigidbody2Dを使うことで物理的な落下を処理）
-        rb.velocity = Vector2.down * fallSpeed;
-    }
-
-    void Rise()
-    {
-        // ドッスンを上限の高さまで上昇させる
-        rb.velocity = Vector2.up * riseSpeed;
-
-        if (transform.position.y >= originalPosition.y)
-        {
-            rb.velocity = Vector2.zero;
-            transform.position = new Vector3(transform.position.x, originalPosition.y, transform.position.z);
-            isRising = false;
-        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

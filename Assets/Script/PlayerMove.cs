@@ -39,8 +39,6 @@ public class PlayerMove : MonoBehaviour
     private bool down_flag = false;
     private bool isDown = false;
 
-
-
     public Tilemap tilemap;
     public TileBase coinedBlockTile;
 

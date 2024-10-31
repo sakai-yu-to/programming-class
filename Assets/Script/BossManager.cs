@@ -29,23 +29,18 @@ public class BossManager : MonoBehaviour
 
         if (!Gamemanager.instance.isHard)
         {
-            // isHardがfalseのときはhardFireを削除
             for (int i = 0; i < hardFire.Length; i++)
             {
                 Destroy(hardFire[i]);
             }
-            // easyFireはそのまま何も変更しない
-
             for(int i = 0; i< hardHammer.Length; i++)
             {
                 Destroy(hardHammer[i]);
             }
-
             Destroy(hammerLock.gameObject);
         }
         else
         {
-            // isHardがtrueのときはhardFireもeasyFireもランダムな値を設定
             for (int i = 0; i < hardFire.Length; i++)
             {
                 FireBarMove fireBarMove = hardFire[i].GetComponent<FireBarMove>();
@@ -55,7 +50,6 @@ public class BossManager : MonoBehaviour
                     fireBarMove.rotationSpeed = Random.Range(100, 401); // 100〜400の間のランダムな値を設定
                 }
             }
-
             for (int i = 0; i < easyFire.Length; i++)
             {
                 FireBarMove fireBarMove = easyFire[i].GetComponent<FireBarMove>();
