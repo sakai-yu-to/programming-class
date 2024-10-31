@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!61 &23196525
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1674,6 +1675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!61 &220754850
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1818,6 +1820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!61 &235389724
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3594,9 +3597,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 1
   moveHorizontally: 0
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &330995233
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3910,6 +3913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!61 &369110479
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4851,9 +4855,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 1
   moveHorizontally: 0
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &488837974
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5351,6 +5355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!61 &529729497
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7011,6 +7016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!61 &792461369
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7578,9 +7584,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 1
   moveHorizontally: 0
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &881371715
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10105,9 +10111,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 0
   moveHorizontally: 1
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &1284047076
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10207,6 +10213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!61 &1295992441
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10922,9 +10929,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 0
   moveHorizontally: 0
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &1344156824
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15988,7 +15995,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hardImage: {fileID: 773064925}
-  gravity: 7
   bounceHeight: 1
   killKuribouHeight: 1
   killKillerHeight: 4
@@ -17070,9 +17076,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 0
   moveHorizontally: 0
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &1534259470
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17763,6 +17769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!61 &1611130606
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18290,6 +18297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!61 &1661728230
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19947,11 +19955,13 @@ MonoBehaviour:
   playerSpeed: 10
   playerJumpSpeed: 15
   playerJumpHeight: 4
+  playerGravity: 7
   kuribouSpeed: 1.5
   dossunFallSpeed: 30
   dossunRiseSpeed: 4
   killerSpeed: 5
   goldkillerCheckCycle: 2
+  gearmoveSpeed: 2
 --- !u!1 &1900756404
 GameObject:
   m_ObjectHideFlags: 0
@@ -20096,6 +20106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!1 &1916218212
 GameObject:
   m_ObjectHideFlags: 0
@@ -20679,6 +20690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMove: {fileID: 1437256648}
+  changevalue: {fileID: 0}
 --- !u!61 &2045460143
 BoxCollider2D:
   m_ObjectHideFlags: 0

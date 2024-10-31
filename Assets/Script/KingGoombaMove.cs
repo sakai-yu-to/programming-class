@@ -5,16 +5,22 @@ using UnityEngine;
 public class KingGoombaMove : MonoBehaviour
 {
     public GameObject player;
-    public float kuribouSpeed; // 左右の移動速度
     private float kuribouxSpeed;
     private Animator kuribouAnim = null;
     private Rigidbody2D kuribourb = null;
     private bool hasTouchedGround = false; // 地面に接触したかどうかを記録するフラグ
     public int turn = 0;
 
+    public changeValue changevalue;
 
     void Start()
     {
+        GameObject gamemanager = GameObject.Find("Gamemanager");
+        if (gamemanager != null)
+        {
+            changevalue = gamemanager.GetComponent<changeValue>();
+        }
+
         kuribourb = GetComponent<Rigidbody2D>();
         kuribouAnim = GetComponent<Animator>();
     }
@@ -28,12 +34,12 @@ public class KingGoombaMove : MonoBehaviour
             if (turn % 2 == 0)
             {
                 transform.localScale = new Vector3(1.8f, 1.8f, 1.8f);
-                kuribouxSpeed = -kuribouSpeed;
+                kuribouxSpeed = -changevalue.kuribouSpeed;
             }
             else
             {
                 transform.localScale = new Vector3(-1.8f, 1.8f, 1.8f);
-                kuribouxSpeed = kuribouSpeed;
+                kuribouxSpeed = changevalue.kuribouSpeed;
             }
 
             kuribourb.velocity = new Vector2(kuribouxSpeed, kuribourb.velocity.y);

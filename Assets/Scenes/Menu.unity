@@ -2155,6 +2155,7 @@ MonoBehaviour:
   playerSpeed: 10
   playerJumpSpeed: 15
   playerJumpHeight: 4
+  playerGravity: 7
   kuribouSpeed: 1.5
   dossunFallSpeed: 30
   dossunRiseSpeed: 4
@@ -5021,7 +5022,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hardImage: {fileID: 315419898}
-  gravity: 7
   bounceHeight: 1
   killKuribouHeight: 1
   killKillerHeight: 4

@@ -10,7 +10,6 @@ public class PlayerMove : MonoBehaviour
 {
     public GameObject hardImage;
 
-    public float gravity;
     public float bounceHeight;
     public float killKuribouHeight = 1.0f;
     public float killKillerHeight = 4.0f;
@@ -167,7 +166,7 @@ public class PlayerMove : MonoBehaviour
             if(jumpingTime > 0.5f)
             {
                 jumpingTime = 0.0f;
-                ySpeed = -gravity;
+                ySpeed = -changevalue.playerGravity;
             }
         }
 
@@ -178,7 +177,7 @@ public class PlayerMove : MonoBehaviour
 
             if (goalMoveTimer < 1.0f) // 最初の1秒は待機 (ワープ前)
             {
-                rb.velocity = new Vector2(0, -gravity);
+                rb.velocity = new Vector2(0, -changevalue.playerGravity);
             }
             else if (goalMoveTimer >= 1.0f && goalMoveTimer < 1.5f) // 次の1秒は右に移動 (ワープ後)
             {
@@ -263,7 +262,7 @@ public class PlayerMove : MonoBehaviour
                 {
                     enemyBounce = false; // バウンス終了
                     isJump = false;
-                    ySpeed = -gravity; // 重力で落下する
+                    ySpeed = -changevalue.playerGravity; // 重力で落下する
                 }
             }
             else if (isJump)
@@ -280,7 +279,7 @@ public class PlayerMove : MonoBehaviour
             }
             else
             {
-                ySpeed = -gravity;
+                ySpeed = -changevalue.playerGravity;
             }
 
             if ((Input.GetKey(KeyCode.RightArrow)) || (Input.GetKey(KeyCode.D)))
@@ -304,7 +303,7 @@ public class PlayerMove : MonoBehaviour
             if (hitDossunFlag && !isGround)
             {
                 xSpeed = 0.0f;
-                ySpeed = -gravity;
+                ySpeed = -changevalue.playerGravity;
             }
 
 
@@ -312,13 +311,13 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector2(0, -gravity);
+            rb.velocity = new Vector2(0, -changevalue.playerGravity);
         }
 
         if (transform.position.y > 11)
         {
             transform.position = new Vector3(transform.position.x, 10, transform.position.z);
-            rb.velocity = new Vector2(0, -gravity);
+            rb.velocity = new Vector2(0, -changevalue.playerGravity);
             enemyBounce = false;
         }
 

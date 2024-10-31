@@ -8786,7 +8786,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hardImage: {fileID: 535304982}
-  gravity: 7
   bounceHeight: 1
   killKuribouHeight: 1
   killKillerHeight: 4
@@ -10361,9 +10360,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 1
   moveHorizontally: 1
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &797188477
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12219,9 +12218,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 0
   moveHorizontally: 1
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!58 &971753401
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12850,9 +12849,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 0
   moveHorizontally: 1
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &1004310438
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22441,11 +22440,13 @@ MonoBehaviour:
   playerSpeed: 10
   playerJumpSpeed: 15
   playerJumpHeight: 4
+  playerGravity: 7
   kuribouSpeed: 1.5
   dossunFallSpeed: 30
   dossunRiseSpeed: 4
   killerSpeed: 5
   goldkillerCheckCycle: 2
+  gearmoveSpeed: 2
 --- !u!1 &1717130893
 GameObject:
   m_ObjectHideFlags: 0
@@ -24544,9 +24545,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 1
   moveHorizontally: 0
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &1985026721
 SpriteRenderer:
   m_ObjectHideFlags: 0

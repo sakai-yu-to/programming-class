@@ -7,9 +7,17 @@ public class HiddenGround : MonoBehaviour
     public PlayerMove playerMove;
     private SpriteRenderer spriteRenderer;
     private Collider2D collider2D;
+    public changeValue changevalue;
+
     // Start is called before the first frame update
     void Start()
     {
+        GameObject gamemanager = GameObject.Find("Gamemanager");
+        if (gamemanager != null)
+        {
+            changevalue = gamemanager.GetComponent<changeValue>();
+        }
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider2D = GetComponent<Collider2D>();
         Color currentColor = spriteRenderer.color;
@@ -28,7 +36,7 @@ public class HiddenGround : MonoBehaviour
     {
         if(other.CompareTag("Head") && playerMove.ySpeed > 0)
         {
-            playerMove.ySpeed = -playerMove.gravity;
+            playerMove.ySpeed = -changevalue.playerGravity;
             collider2D.isTrigger = false;
             Color currentColor = spriteRenderer.color;
             float newAlpha = 1.0f;
