@@ -16,6 +16,8 @@ public class BossManager : MonoBehaviour
     public Tilemap bossLock;
     public GameObject[] bossSituation;
     public int bossStatus;
+    public GameObject[] easybosshammer;
+    public GameObject[] hardbosshammer;
 
     private bool hammerdeleted = false;
     private bool changeStatus = false;
@@ -39,6 +41,10 @@ public class BossManager : MonoBehaviour
             for(int i = 0; i< hardHammer.Length; i++)
             {
                 Destroy(hardHammer[i]);
+            }
+            for(int i = 0; i< hardbosshammer.Length; i++)
+            {
+                Destroy(hardbosshammer[i]);
             }
             Destroy(hammerLock.gameObject);
         }

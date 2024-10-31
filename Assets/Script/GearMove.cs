@@ -6,7 +6,6 @@ public class GearMove : MonoBehaviour
 {
     public bool moveVertically = false;   // 縦方向の移動フラグ
     public bool moveHorizontally = false; // 横方向の移動フラグ
-    public float moveSpeed = 2f;          // 移動速度
     public float rotationSpeed = 50f;     // 回転速度
     public float directionChangeInterval = 2f; // 移動方向を反転する間隔（秒）
 
@@ -14,8 +13,16 @@ public class GearMove : MonoBehaviour
     private float timer;
     private Vector2 direction;
 
+    public changeValue changevalue;
+
     void Start()
     {
+        GameObject gamemanager = GameObject.Find("Gamemanager");
+        if (gamemanager != null)
+        {
+            changevalue = gamemanager.GetComponent<changeValue>();
+        }
+
         rb = GetComponent<Rigidbody2D>(); // Rigidbody2D コンポーネントを取得
         direction = Vector2.one;          // 初期移動方向を1（正の方向）に設定
 
@@ -45,13 +52,13 @@ public class GearMove : MonoBehaviour
         if (moveVertically)
         {
             // 縦方向の速度を設定
-            movement.y = direction.y * moveSpeed;
+            movement.y = direction.y * changevalue.gearmoveSpeed;
         }
 
         if (moveHorizontally)
         {
             // 横方向の速度を設定
-            movement.x = direction.x * moveSpeed;
+            movement.x = direction.x * changevalue.gearmoveSpeed;
         }
 
         // Rigidbody2D の速度を設定

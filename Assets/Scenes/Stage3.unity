@@ -6605,9 +6605,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 590985256}
-  fallSpeed: 30
-  riseSpeed: 4
   triggerDistance: 2
+  changevalue: {fileID: 0}
 --- !u!61 &424224090
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6996,9 +6995,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 590985256}
-  fallSpeed: 30
-  riseSpeed: 4
   triggerDistance: 2
+  changevalue: {fileID: 0}
 --- !u!61 &482026297
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8788,9 +8786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hardImage: {fileID: 535304982}
-  jumpSpeed: 15
   gravity: 7
-  jumpHeight: 4
   bounceHeight: 1
   killKuribouHeight: 1
   killKillerHeight: 4
@@ -8799,7 +8795,6 @@ MonoBehaviour:
   head: {fileID: 210353336}
   isGround: 0
   isJump: 0
-  speed: 10
   xSpeed: 0
   ySpeed: 0
   down_time: 0
@@ -8830,6 +8825,7 @@ MonoBehaviour:
   hitDossunFlag: 0
   killKuribou: 0
   killKiller: 0
+  changevalue: {fileID: 0}
 --- !u!4 &590985268
 Transform:
   m_ObjectHideFlags: 0
@@ -12376,7 +12372,7 @@ Transform:
   m_GameObject: {fileID: 975763619}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5979557, y: 0.9999995, z: -10}
+  m_LocalPosition: {x: 0.59900284, y: 0.9999995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15378,9 +15374,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 590985256}
-  fallSpeed: 30
-  riseSpeed: 4
   triggerDistance: 2
+  changevalue: {fileID: 0}
 --- !u!61 &1364686047
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19471,9 +19466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 590985256}
-  fallSpeed: 30
-  riseSpeed: 4
   triggerDistance: 2
+  changevalue: {fileID: 0}
 --- !u!61 &1456357377
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22279,6 +22273,7 @@ GameObject:
   - component: {fileID: 1710630234}
   - component: {fileID: 1710630233}
   - component: {fileID: 1710630232}
+  - component: {fileID: 1710630235}
   m_Layer: 0
   m_Name: Gamemanager
   m_TagString: Untagged
@@ -22431,6 +22426,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1710630235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710630231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd621f19f3e2a045ae3a80d584fcaa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 10
+  playerJumpSpeed: 15
+  playerJumpHeight: 4
+  kuribouSpeed: 1.5
+  dossunFallSpeed: 30
+  dossunRiseSpeed: 4
+  killerSpeed: 5
+  goldkillerCheckCycle: 2
 --- !u!1 &1717130893
 GameObject:
   m_ObjectHideFlags: 0
@@ -22685,9 +22700,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 590985256}
-  fallSpeed: 30
-  riseSpeed: 4
   triggerDistance: 2
+  changevalue: {fileID: 0}
 --- !u!61 &1766064846
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -23350,6 +23364,8 @@ MonoBehaviour:
   kurikillClip: {fileID: 8300000, guid: cf57f1069f8c79647bf866783acc9d56, type: 3}
   breakSource: {fileID: 1851073512}
   breakClip: {fileID: 8300000, guid: 1eb9c8086d9f19546a9010f20457f7a4, type: 3}
+  killHammer: 0
+  touchLamp: 0
 --- !u!61 &1851073510
 BoxCollider2D:
   m_ObjectHideFlags: 0

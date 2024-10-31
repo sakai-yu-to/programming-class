@@ -5,7 +5,6 @@ using UnityEngine;
 public class KuribouMove : MonoBehaviour
 {
     public GameObject player;
-    public float kuribouSpeed; // ç∂âEÇÃà⁄ìÆë¨ìx
     private float kuribouxSpeed;
     private Animator kuribouAnim = null;
     private Rigidbody2D kuribourb = null;
@@ -15,9 +14,16 @@ public class KuribouMove : MonoBehaviour
     private Vector3 originalPosition; 
     private bool moveBigin = false;
 
+    public changeValue changevalue;
 
     void Start()
     {
+        GameObject gamemanager = GameObject.Find("Gamemanager");
+        if (gamemanager != null)
+        {
+            changevalue = gamemanager.GetComponent<changeValue>();
+        }
+
         originalPosition = transform.position; // å≥ÇÃà íuÇï€ë∂
         kuribourb = GetComponent<Rigidbody2D>();
         kuribouAnim = GetComponent<Animator>();
@@ -40,12 +46,12 @@ public class KuribouMove : MonoBehaviour
                 if (turn % 2 == 0)
                 {
                     transform.localScale = new Vector3(1.8f, 1.8f, 1.8f);
-                    kuribouxSpeed = -kuribouSpeed;
+                    kuribouxSpeed = -changevalue.kuribouSpeed;
                 }
                 else
                 {
                     transform.localScale = new Vector3(-1.8f, 1.8f, 1.8f);
-                    kuribouxSpeed = kuribouSpeed;
+                    kuribouxSpeed = changevalue.kuribouSpeed;
                 }
 
                 kuribourb.velocity = new Vector2(kuribouxSpeed, kuribourb.velocity.y);

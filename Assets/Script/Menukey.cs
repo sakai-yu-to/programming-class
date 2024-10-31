@@ -19,6 +19,7 @@ public class Menukey : MonoBehaviour
     void Update()
     {
         
+
         if (Gamemanager.instance.isHard)
         {
             hardImage.SetActive(true);
@@ -28,7 +29,10 @@ public class Menukey : MonoBehaviour
             hardImage.SetActive(false);
         }
         
-
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            Gamemanager.instance.isHard = !Gamemanager.instance.isHard;
+        }
 
         if (Input.GetKey(KeyCode.W))
         {

@@ -3,8 +3,7 @@ using UnityEngine;
 public class HammerBroMove : MonoBehaviour
 {
     // 移動関連のパラメータ
-    public float moveSpeedMin = 8f;
-    public float moveSpeedMax = 15f;
+    public Vector2 moveSpeed = new Vector2(8f, 15f);
     public float moveChangeInterval = 1f;
     public float jumpForce = 10f;
     public float ySpeed = -7f;
@@ -36,7 +35,7 @@ public class HammerBroMove : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         // 初回のランダムな移動速度とジャンプ時間の設定
-        currentMoveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
+        currentMoveSpeed = Random.Range(moveSpeed.x, moveSpeed.y);
         nextJumpTime = Random.Range(jumpIntervalRange.x, jumpIntervalRange.y);
         jumpHeightLimit = Random.Range(jumpHeightRange.x, jumpHeightRange.y);
         moveChangeInterval = Random.Range(1f, 2f);
@@ -58,7 +57,7 @@ public class HammerBroMove : MonoBehaviour
         moveChangeTimer += Time.deltaTime;
         if (moveChangeTimer >= moveChangeInterval)
         {
-            currentMoveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
+            currentMoveSpeed = Random.Range(moveSpeed.x, moveSpeed.y);
             moveDirection *= -1;
             moveChangeTimer = 0f;
             moveChangeInterval = Random.Range(1f, 2f);

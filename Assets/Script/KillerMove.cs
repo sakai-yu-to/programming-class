@@ -6,19 +6,25 @@ using UnityEngine;
 public class KillerMove : MonoBehaviour
 {
     public GameObject playermove;  // プレイヤーを指定
-    public float killerSpeed;  // 敵の移動スピード
     private Rigidbody2D killerrb;
     private Animator killerAnim;
 
     public bool isGold = false;  // プレイヤーを追尾するか
     public bool goRight = false;  // 右に移動するか
 
-    public float checkCycle;  // 追尾チェック周期
     private float trackingTime = 0.0f;
+
+    public changeValue changevalue;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject gamemanager = GameObject.Find("Gamemanager");
+        if (gamemanager != null)
+        {
+            changevalue = gamemanager.GetComponent<changeValue>();
+        }
+
         killerrb = GetComponent<Rigidbody2D>();
         killerAnim = GetComponent<Animator>();
         playermove = GameObject.Find("Player");  // プレイヤーを探す
@@ -34,13 +40,13 @@ public class KillerMove : MonoBehaviour
         {
             // プレイヤーを追尾するロジック
             trackingTime += Time.deltaTime;
-            if (trackingTime >= checkCycle)
+            if (trackingTime >= changevalue.goldkillerCheckCycle)
             {
                 trackingTime = 0.0f;
 
                 // プレイヤーの方向を計算
                 Vector2 direction = (playermove.transform.position - transform.position).normalized;
-                killerrb.velocity = direction * killerSpeed;
+                killerrb.velocity = direction * changevalue.killerSpeed;
 
                 // スプライトの向きを設定
                 UpdateScaleAndRotation(direction);
@@ -59,12 +65,12 @@ public class KillerMove : MonoBehaviour
         if (goRight)
         {
             localScale.x = -0.15f;  // 右向きにスケール
-            killerrb.velocity = new Vector2(killerSpeed, 0);  // 右に移動
+            killerrb.velocity = new Vector2(changevalue.killerSpeed, 0);  // 右に移動
         }
         else
         {
             localScale.x = 0.15f;  // 左向きにスケール
-            killerrb.velocity = new Vector2(-killerSpeed, 0);  // 左に移動
+            killerrb.velocity = new Vector2(-changevalue.killerSpeed, 0);  // 左に移動
         }
         transform.localScale = localScale;
     }

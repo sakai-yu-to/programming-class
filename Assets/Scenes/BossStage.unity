@@ -455,9 +455,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 1
   moveHorizontally: 0
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &99479455
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5015,9 +5015,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1334348830}
-  fallSpeed: 30
-  riseSpeed: 4
   triggerDistance: 2
+  changevalue: {fileID: 0}
 --- !u!61 &344922114
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5260,9 +5259,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVertically: 0
   moveHorizontally: 1
-  moveSpeed: 5
   rotationSpeed: 400
   directionChangeInterval: 1.8
+  changevalue: {fileID: 0}
 --- !u!212 &360869494
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5817,9 +5816,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1334348830}
-  fallSpeed: 30
-  riseSpeed: 4
   triggerDistance: 2
+  changevalue: {fileID: 0}
 --- !u!61 &424224090
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6984,6 +6982,7 @@ GameObject:
   - component: {fileID: 710429531}
   - component: {fileID: 710429530}
   - component: {fileID: 710429529}
+  - component: {fileID: 710429532}
   m_Layer: 0
   m_Name: Gamemanager
   m_TagString: Untagged
@@ -7136,6 +7135,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710429532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710429528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd621f19f3e2a045ae3a80d584fcaa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 10
+  playerJumpSpeed: 15
+  playerJumpHeight: 4
+  kuribouSpeed: 1.5
+  dossunFallSpeed: 30
+  dossunRiseSpeed: 4
+  killerSpeed: 5
+  goldkillerCheckCycle: 2
+  gearmoveSpeed: 5
 --- !u!1 &747591119
 GameObject:
   m_ObjectHideFlags: 0
@@ -8616,7 +8636,7 @@ Transform:
   m_GameObject: {fileID: 975763619}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5990017, y: 1, z: -10}
+  m_LocalPosition: {x: 0.5930729, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10815,9 +10835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hardImage: {fileID: 1149739001}
-  jumpSpeed: 15
   gravity: 7
-  jumpHeight: 4
   bounceHeight: 1
   killKuribouHeight: 1
   killKillerHeight: 4
@@ -10826,7 +10844,6 @@ MonoBehaviour:
   head: {fileID: 1733464798}
   isGround: 0
   isJump: 0
-  speed: 10
   xSpeed: 0
   ySpeed: 0
   down_time: 0
@@ -10857,6 +10874,7 @@ MonoBehaviour:
   hitDossunFlag: 0
   killKuribou: 0
   killKiller: 0
+  changevalue: {fileID: 0}
 --- !u!4 &1334348842
 Transform:
   m_ObjectHideFlags: 0
@@ -19107,18 +19125,20 @@ MonoBehaviour:
   - {fileID: 956213969}
   - {fileID: 1656247150}
   - {fileID: 2065721294}
-  - {fileID: 921173020}
-  - {fileID: 172943272}
   easyHammer:
   - {fileID: 2035316890}
   - {fileID: 1068993749}
-  - {fileID: 577232113}
   hammerLock: {fileID: 440096199}
   bossLock: {fileID: 204548358}
   bossSituation:
   - {fileID: 776610555}
   - {fileID: 1288796363}
   bossStatus: 0
+  easybosshammer:
+  - {fileID: 577232113}
+  hardbosshammer:
+  - {fileID: 921173020}
+  - {fileID: 172943272}
   bossDownLimitedTime: 5
 --- !u!4 &1604965915
 Transform:
@@ -21066,8 +21086,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1719010915
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 63820c0b52258ca4f8e83008243705bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

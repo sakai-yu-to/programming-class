@@ -10,9 +10,7 @@ public class PlayerMove : MonoBehaviour
 {
     public GameObject hardImage;
 
-    public float jumpSpeed;
     public float gravity;
-    public float jumpHeight;
     public float bounceHeight;
     public float killKuribouHeight = 1.0f;
     public float killKillerHeight = 4.0f;
@@ -30,7 +28,6 @@ public class PlayerMove : MonoBehaviour
     private float jumpPos = 0.0f;
     private float bounceStartPos = 0.0f; 
 
-    public float speed = 5.0f;
     public float xSpeed = 0.0f;
     public float ySpeed = 0.0f;
 
@@ -100,8 +97,15 @@ public class PlayerMove : MonoBehaviour
     public bool killKiller = false;
 
     private SpriteRenderer spriteRenderer;
+
+    public changeValue changevalue;
     void Start()
     {
+        GameObject gamemanager = GameObject.Find("Gamemanager");
+        if (gamemanager != null)
+        {
+            changevalue = gamemanager.GetComponent<changeValue>();
+        }
         Gamemanager.instance.life = 10;
         Gamemanager.instance.totalCoin = 0;
         anim = GetComponent<Animator>();
@@ -157,7 +161,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
-        if (ySpeed >= jumpSpeed * 3)
+        if (ySpeed >= changevalue.playerJumpSpeed * 3)
         {
             jumpingTime += Time.deltaTime;
             if(jumpingTime > 0.5f)
@@ -188,7 +192,7 @@ public class PlayerMove : MonoBehaviour
 
                     isGoalMoving = true; // 移動を開始する
                 }
-                rb.velocity = new Vector2(speed, rb.velocity.y); // 右方向に移動
+                rb.velocity = new Vector2(changevalue.playerSpeed, rb.velocity.y); // 右方向に移動
                 Debug.Log("go right");
             }
             else if (goalMoveTimer >= 1.5f && goalMoveTimer < 4.0f) // 次の1秒はランダムに動く
@@ -202,7 +206,7 @@ public class PlayerMove : MonoBehaviour
                 // ランダムな方向に移動
                 float randomX = Random.Range(-2f, 2f); // -1から1の範囲でランダムなX方向を選択
                 float randomY = Random.Range(-1f, 2f); // -1から1の範囲でランダムなY方向を選択
-                rb.velocity = new Vector2(randomX * speed, randomY * speed);
+                rb.velocity = new Vector2(randomX * changevalue.playerSpeed, randomY * changevalue.playerSpeed);
             }
             else // すべての動作終了
             {
@@ -239,7 +243,7 @@ public class PlayerMove : MonoBehaviour
                 if ((Input.GetKey(KeyCode.UpArrow)) || (Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.Space)))
                 {
                     isJump = true;
-                    ySpeed = jumpSpeed * 3;
+                    ySpeed = changevalue.playerJumpSpeed * 3;
                     jumpPos = transform.position.y;
 
 
@@ -265,9 +269,9 @@ public class PlayerMove : MonoBehaviour
             else if (isJump)
             {
                 isGround = false;
-                if (((Input.GetKey(KeyCode.UpArrow)) || (Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.Space))) && (jumpPos + jumpHeight) > transform.position.y && !isHead)
+                if (((Input.GetKey(KeyCode.UpArrow)) || (Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.Space))) && (jumpPos + changevalue.playerJumpHeight) > transform.position.y && !isHead)
                 {
-                    ySpeed = jumpSpeed;
+                    ySpeed = changevalue.playerJumpSpeed;
                 }
                 else
                 {
@@ -283,13 +287,13 @@ public class PlayerMove : MonoBehaviour
             {
                 transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 anim.SetBool("run", true);
-                xSpeed = speed;
+                xSpeed = changevalue.playerSpeed;
             }
             else if ((Input.GetKey(KeyCode.LeftArrow)) || (Input.GetKey(KeyCode.A)))
             {
                 transform.localScale = new Vector3(-1.3f, 1.3f, 1.3f);
                 anim.SetBool("run", true);
-                xSpeed = -speed;
+                xSpeed = -changevalue.playerSpeed;
               }
             else
             {

@@ -1987,6 +1987,7 @@ GameObject:
   - component: {fileID: 861449541}
   - component: {fileID: 861449540}
   - component: {fileID: 861449539}
+  - component: {fileID: 861449542}
   m_Layer: 0
   m_Name: Gamemanager
   m_TagString: Untagged
@@ -2139,6 +2140,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &861449542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861449538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd621f19f3e2a045ae3a80d584fcaa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 10
+  playerJumpSpeed: 15
+  playerJumpHeight: 4
+  kuribouSpeed: 1.5
+  dossunFallSpeed: 30
+  dossunRiseSpeed: 4
+  killerSpeed: 5
+  goldkillerCheckCycle: 2
+  gearmoveSpeed: 5
 --- !u!1 &936871680
 GameObject:
   m_ObjectHideFlags: 0
@@ -4999,9 +5021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hardImage: {fileID: 315419898}
-  jumpSpeed: 15
   gravity: 7
-  jumpHeight: 4
   bounceHeight: 1
   killKuribouHeight: 1
   killKillerHeight: 4
@@ -5010,7 +5030,6 @@ MonoBehaviour:
   head: {fileID: 1610205282}
   isGround: 0
   isJump: 0
-  speed: 10
   xSpeed: 0
   ySpeed: 0
   down_time: 0
@@ -5041,6 +5060,7 @@ MonoBehaviour:
   hitDossunFlag: 0
   killKuribou: 0
   killKiller: 0
+  changevalue: {fileID: 0}
 --- !u!4 &1433550203
 Transform:
   m_ObjectHideFlags: 0
@@ -5484,6 +5504,8 @@ MonoBehaviour:
   kurikillClip: {fileID: 8300000, guid: cf57f1069f8c79647bf866783acc9d56, type: 3}
   breakSource: {fileID: 1556986250}
   breakClip: {fileID: 8300000, guid: 1eb9c8086d9f19546a9010f20457f7a4, type: 3}
+  killHammer: 0
+  touchLamp: 0
 --- !u!61 &1556986248
 BoxCollider2D:
   m_ObjectHideFlags: 0

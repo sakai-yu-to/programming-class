@@ -5,20 +5,24 @@ using UnityEngine;
 public class DossunMove : MonoBehaviour
 {
     public GameObject player; // プレイヤーの参照
-    public float fallSpeed = 5f; // 落下速度
-    public float riseSpeed = 2f; // 上昇速度
     public float triggerDistance; // プレイヤーが近づく距離
     private Vector3 originalPosition; // ドッスンの元の位置
     private bool isFalling = false; // ドッスンが落下中かどうか
     private bool isRising = false; // ドッスンが上昇中かどうか
     private bool isWaiting = false; // 待機中かどうか
 
-
-
     private Rigidbody2D rb;
+
+    public changeValue changevalue;
 
     void Start()
     {
+        GameObject gamemanager = GameObject.Find("Gamemanager");
+        if (gamemanager != null)
+        {
+            changevalue = gamemanager.GetComponent<changeValue>();
+        }
+
         originalPosition = transform.position; 
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -43,11 +47,11 @@ public class DossunMove : MonoBehaviour
 
         if (isFalling)
         {
-            rb.velocity = Vector2.down * fallSpeed;
+            rb.velocity = Vector2.down * changevalue.dossunFallSpeed;
         }
         else if (isRising)
         {
-            rb.velocity = Vector2.up * riseSpeed;
+            rb.velocity = Vector2.up * changevalue.dossunRiseSpeed;
 
             if (transform.position.y >= originalPosition.y)
             {
