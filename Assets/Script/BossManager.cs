@@ -13,6 +13,7 @@ public class BossManager : MonoBehaviour
     public GameObject[] hardHammer;
     public GameObject[] easyHammer;
     public Tilemap hammerLock;
+    public Tilemap bossLock;
     public GameObject[] bossSituation;
     public int bossStatus;
 
@@ -21,6 +22,8 @@ public class BossManager : MonoBehaviour
 
     public float bossDownLimitedTime = 5.0f;
     private float bossDownTime = 0;
+
+    private bool bosskilled = false;
 
     // Start is called before the first frame update
     void Start()
@@ -102,6 +105,13 @@ public class BossManager : MonoBehaviour
 
             }
 
+        }
+
+
+        if(bossStatus == 5 && !bosskilled)
+        {
+            Destroy(bossLock.gameObject);
+            bosskilled = true;
         }
     }
 

@@ -486,6 +486,12 @@ public class PlayerMove : MonoBehaviour
                 damageFlag = true;
             }
 
+            if (collision.collider.CompareTag("Boss"))
+            {
+                Debug.Log("Player hit Boss!");
+                damageFlag = true;
+            }
+
 
             if (collision.collider.CompareTag("Coin"))
             {

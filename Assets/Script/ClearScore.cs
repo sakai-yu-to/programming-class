@@ -32,6 +32,8 @@ public class ClearScore : MonoBehaviour
 
     public GameObject hardImage;
 
+    public GameObject[] stageName;
+
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +62,12 @@ public class ClearScore : MonoBehaviour
 
         rollSource.Play();
         
+        for(int i = 0; i < stageName.Length; i++)
+        {
+            stageName[i].SetActive(false);
+        }
+
+        stageName[Gamemanager.instance.playStage].SetActive(true);
 
     }
 
