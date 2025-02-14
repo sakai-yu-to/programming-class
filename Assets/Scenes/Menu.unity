@@ -2105,10 +2105,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 10
   totalCoin: 0
-  Stage1totalTime: 200
-  Stage2totalTime: 200
-  Stage3totalTime: 200
-  Stage4totalTime: 200
+  Stage1totalTime: 400
+  Stage2totalTime: 400
+  Stage3totalTime: 400
+  Stage4totalTime: 400
   clearTime: 0
   highestScore:
   - 0

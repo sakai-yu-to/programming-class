@@ -4,33 +4,55 @@ using UnityEngine;
 
 public class changeValue : MonoBehaviour
 {
-    public float playerSpeed; //player
-    public float playerJumpSpeed;
-    public float playerJumpHeight;
-    public float playerGravity;
+    [Header("プレイヤーの速度")]public float playerSpeed; //player
+    [Header("プレイヤーのジャンプ速度")] public float playerJumpSpeed;
+    [Header("プレイヤーのジャンプ力")] public float playerJumpHeight;
+    [Header("プレイヤーにかかる重力")] public float playerGravity;
 
-    public float kuribouSpeed; //kuribou
+    [Header("クリボーの速度")] public float kuribouSpeed; //kuribou
 
-    public float dossunFallSpeed; // dossun
-    public float dossunRiseSpeed;
+    [Header("ドッスンの落下速度")] public float dossunFallSpeed; // dossun
+    [Header("ドッスンの上昇速度")] public float dossunRiseSpeed;
 
 
-    public float killerSpeed;  //killer
-    public float goldkillerCheckCycle;  // 追尾チェック周期
+    [Header("キラーの速度")] public float killerSpeed;  //killer
+    [Header("金キラーの追尾間隔")] public float goldkillerCheckCycle;  // 追尾チェック周期
         
-    public float gearmoveSpeed = 2f; //gear
-
+    [Header("歯車の速度")] public float gearmoveSpeed; //gear
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerSpeed = 10;
+        playerJumpSpeed = 15;
+        playerJumpHeight = 4;
+        playerGravity = 7;
+        kuribouSpeed = 1.5f;
+        dossunFallSpeed = 30;
+        dossunRiseSpeed = 4;
+        killerSpeed = 5;
+        goldkillerCheckCycle = 2;
+        gearmoveSpeed = 5;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            playerSpeed = 10;
+            playerJumpSpeed = 15;
+            playerJumpHeight = 4;
+            playerGravity = 7;
+            kuribouSpeed = 1.5f;
+            dossunFallSpeed = 30;
+            dossunRiseSpeed = 4;
+            killerSpeed = 5;
+            goldkillerCheckCycle = 2;
+            gearmoveSpeed = 5;
+        }
+
     }
 }
